@@ -1737,3 +1737,138 @@ h2 {
 .detail-header h2 {
   font-size: clamp(1.2rem, 3vw, 1.8rem);
 }
+/* ==================== МОБИЛЬНАЯ АДАПТАЦИЯ ДОСТИЖЕНИЙ ==================== */
+
+@media (max-width: 600px) {
+  
+  /* Статистика в одну строку с прокруткой */
+  .stats-inline {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 1rem;
+    padding: 0.8rem 1rem;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .stats-percent {
+    min-width: 70px;
+  }
+  
+  .percent-value {
+    font-size: 1.8rem;
+  }
+  
+  .stats-categories {
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+  
+  .stats-cat-item {
+    font-size: 0.65rem;
+    gap: 0.3rem;
+  }
+  
+  .stats-cat-name {
+    display: none; /* Скрываем названия категорий, оставляем только иконки и цифры */
+  }
+  
+  /* Сетка достижений — одна колонка */
+  .achievements-grid-full {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+  
+  /* Карточка достижения */
+  .achievement-card {
+    padding: 0.8rem 0.6rem;
+    gap: 0.5rem;
+    min-height: auto;
+  }
+  
+  .ach-icon {
+    font-size: 1.6rem;
+    min-width: 40px;
+  }
+  
+  .ach-header h3 {
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+  }
+  
+  .ach-header {
+    flex-wrap: nowrap;
+    gap: 0.3rem;
+  }
+  
+  .ach-info p {
+    font-size: 0.7rem;
+    white-space: normal; /* Перенос текста */
+    line-height: 1.3;
+  }
+  
+  .ach-rarity-badge {
+    font-size: 0.55rem;
+    padding: 0.1rem 0.3rem;
+  }
+  
+  .ach-status {
+    min-width: 25px;
+  }
+  
+  .ach-badge {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.3rem;
+  }
+  
+  /* Категории */
+  .achievement-category {
+    margin-bottom: 1.5rem;
+  }
+  
+  .category-title {
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    margin-bottom: 0.8rem;
+  }
+  
+  /* Заголовок */
+  .achievements-header .main-title {
+    font-size: 2rem !important;
+    letter-spacing: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Прогресс-бар */
+  .progress-bar-container {
+    width: 90%;
+  }
+}
+
+/* Очень маленькие экраны (до 380px) */
+@media (max-width: 380px) {
+  .percent-value {
+    font-size: 1.5rem;
+  }
+  
+  .stats-cat-count {
+    font-size: 0.7rem;
+  }
+  
+  .ach-icon {
+    font-size: 1.3rem;
+    min-width: 32px;
+  }
+  
+  .ach-header h3 {
+    font-size: 0.7rem;
+  }
+  
+  .ach-info p {
+    font-size: 0.65rem;
+  }
+  
+  .achievement-card {
+    padding: 0.6rem 0.4rem;
+  }
+}
