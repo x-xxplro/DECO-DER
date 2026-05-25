@@ -67,7 +67,7 @@ export function renderAchievements() {
   app.innerHTML = `
     <div class="achievements-container">
       <header class="achievements-header">
-        <h1 class="main-title" style="text-align: center; font-size: 3rem; margin-bottom: 1.5rem;">
+        <h1 class="main-title" style="text-align: center; font-size: 2.3rem; margin-bottom: 1.5rem;">
           <span class="glitch-text" data-text="ДОСТИЖЕНИЯ">ДОСТИЖЕНИЯ</span>
         </h1>
         

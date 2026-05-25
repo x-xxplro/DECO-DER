@@ -224,7 +224,7 @@ export function renderLibrary() {
         <div class="header-line">
           <span class="prompt-symbol">></span>
         </div>
-        <h1 class="main-title" style="font-size: 2.5rem;">
+        <h1 class="main-title" style="font-size: 2.3rem;">
           <span class="glitch-text" data-text="БИБЛИОТЕКА">БИБЛИОТЕКА</span>
         </h1>
         <div class="subtitle-container">
