@@ -64,63 +64,50 @@ export function renderAchievements() {
     return { ...cat, unlocked: unlockedCount, total: catAchievements.length };
   });
   
-app.innerHTML = `
+  app.innerHTML = `
     <div class="achievements-container">
       <header class="achievements-header">
         <div class="header-line">
           <span class="prompt-symbol">></span>
         </div>
-        <h1 class="main-title" style="font-size: 2.3rem;">
+        <h1 class="main-title" style="font-size: clamp(1.8rem, 5vw, 2.5rem); text-align: center;">
           <span class="glitch-text" data-text="ДОСТИЖЕНИЯ">ДОСТИЖЕНИЯ</span>
         </h1>
-        <div class="subtitle-container">
-          <span class="line-decoration"></span>
-          <p class="subtitle">Ваши игровые победы</p>
-          <span class="line-decoration"></span>
-        </div>
-        <p style="text-align: center; opacity: 0.7; margin-bottom: 2rem;">
+        <p style="text-align: center; opacity: 0.7; margin: 0.8rem 0; font-size: clamp(0.7rem, 2vw, 0.9rem);">
           ${percent}% выполнено (${totalUnlocked}/${totalAll})
         </p>
       </header>
 
-      <div class="stats-inline" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding: 1rem; background: rgba(0,0,0,0.3); border-left: 3px solid #00ff9d;">
-        <div class="stats-percent" style="font-size: 1.5rem; font-weight: bold;">
-          <span class="percent-value" style="color: #00ff9d;">${percent}%</span>
-          <span class="percent-label" style="margin-left: 0.5rem; opacity: 0.7;">${totalUnlocked}/${totalAll}</span>
-        </div>
-        
-        <div class="stats-categories" style="display: flex; gap: 1rem;">
-          ${catStats.map(cat => `
-            <div class="stats-cat-item" style="display: flex; align-items: center; gap: 0.5rem;">
-              <span class="stats-cat-icon">${cat.icon}</span>
-              <span class="stats-cat-name" style="opacity: 0.8;">${cat.name}</span>
-              <span class="stats-cat-count" style="color: #00ff9d;">${cat.unlocked}/${cat.total}</span>
-            </div>
-          `).join('')}
-        </div>
+      <!-- Статистика по категориям в строку -->
+      <div class="stats-inline">
+        ${catStats.map(cat => `
+          <div class="stats-cat-item">
+            <span class="stats-cat-icon">${cat.icon}</span>
+            <span class="stats-cat-name">${cat.name}</span>
+            <span class="stats-cat-count">${cat.unlocked}/${cat.total}</span>
+          </div>
+        `).join('')}
       </div>
 
-      <div class="library-grid achievements-grid">
+      <!-- Сетка достижений -->
+      <div class="achievements-grid-full">
         ${allAchievements.map(ach => {
           const isUnlocked = unlockedIds.includes(ach.id);
           const isSecretLocked = !isUnlocked && ach.category === 'secret';
+          const rarityColor = rarityColors[ach.rarity]?.color || '#888';
           
           return `
-            <div class="library-card achievement-card ${isUnlocked ? 'unlocked' : 'locked'}" style="opacity: ${isUnlocked ? 1 : 0.7};">
-              <div class="library-card-header">
-                <span class="card-number">${ach.icon}</span>
-                <span class="card-arrow">${isUnlocked ? '✓' : '🔒'}</span>
+            <div class="ach-card ${isUnlocked ? 'unlocked' : 'locked'}">
+              <div class="ach-icon">${ach.icon}</div>
+              <div class="ach-info">
+                <div class="ach-name">${isSecretLocked ? '???' : ach.name}</div>
+                <div class="ach-desc">${isSecretLocked ? 'Условия скрыты' : ach.desc}</div>
+                <div class="ach-meta">
+                  <span class="ach-rarity" style="color: ${rarityColor}; border-color: ${rarityColor};">${ach.rarityName}</span>
+                  <span class="ach-cat">${categories.find(c => c.key === ach.category).icon}</span>
+                </div>
               </div>
-              <h3 class="library-card-title" style="font-size: 1.3rem;">${isSecretLocked ? '???' : ach.name}</h3>
-              <div class="library-card-preview" style="font-size: 0.9rem;">
-                ${isSecretLocked ? 'Условия получения скрыты' : ach.desc}
-              </div>
-              <div class="library-card-footer">
-                <span class="card-action" style="color: ${isUnlocked ? rarityColors[ach.rarity]?.color || '#00ff9d' : '#666'}">
-                  ${isUnlocked ? ach.rarityName : '[ ЗАКРЫТО ]'}
-                </span>
-                <span class="ach-cat-badge" style="margin-left: 0.5rem;">${categories.find(c => c.key === ach.category).icon}</span>
-              </div>
+              <div class="ach-check">${isUnlocked ? '✓' : '🔒'}</div>
             </div>
           `;
         }).join('')}
